@@ -1,0 +1,16 @@
+# Environment Variables
+.env
+backend/.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+backend/audio_temp/
+
+# Node/Frontend
+node_modules/
+frontend/dist/
+frontend/.env
