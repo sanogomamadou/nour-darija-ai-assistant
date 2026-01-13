@@ -5,10 +5,4 @@ python-dotenv
 openai
 httpx
 pydantic
-torch --index-url https://download.pytorch.org/whl/cu121
-transformers
-accelerate
-bitsandbytes
-scipy
-faster-whisper
-optimum
+google-generativeai

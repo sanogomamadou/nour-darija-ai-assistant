@@ -16,10 +16,11 @@ from services.tts_service import generate_audio
 
 app = FastAPI(title="Nour Chatbot API", version="0.1.0")
 
-# CORS Configuration
 origins = [
-    "http://localhost:5173", # Vite default port
+    "http://localhost:5173",
     "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "*", 
 ]
 
 app.add_middleware(
