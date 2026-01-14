@@ -1,0 +1,42 @@
+[
+    {
+        "id": "chem_01",
+        "category": "Chimio",
+        "content": "La chimiothérapie est un traitement qui utilise des médicaments pour détruire les cellules cancéreuses. Elle vise à empêcher les cellules de se diviser et de grandir. C'est un traitement systémique, ce qui signifie qu'il parcourt tout le corps."
+    },
+    {
+        "id": "chem_02",
+        "category": "Chimio",
+        "content": "Les effets secondaires courants de la chimio incluent la fatigue intense, les nausées, les vomissements, la perte d'appétit et la chute des cheveux (alopécie). Ces effets varient selon les médicaments utilisés et chaque femme réagit différemment."
+    },
+    {
+        "id": "chem_03",
+        "category": "Chimio",
+        "content": "Pour gérer la fatigue pendant la chimio : il est essentiel de se reposer dès que le besoin se fait sentir, de boire beaucoup d'eau, et de pratiquer une activité physique légère comme la marche si possible."
+    },
+    {
+        "id": "rad_01",
+        "category": "Radio",
+        "content": "La radiothérapie utilise des rayons ou des particules à haute énergie pour détruire les cellules cancéreuses. Contrairement à la chimio, c'est un traitement local qui ne touche que la zone ciblée (le sein, l'aisselle)."
+    },
+    {
+        "id": "rad_02",
+        "category": "Radio",
+        "content": "Les effets secondaires de la radiothérapie sont souvent cutanés : rougeurs ressemblant à un coup de soleil, sécheresse, ou démangeaisons sur la zone traitée. La fatigue est aussi possible mais souvent moins intense que pour la chimio."
+    },
+    {
+        "id": "sup_01",
+        "category": "Soutien",
+        "content": "Le casque réfrigérant est un dispositif porté pendant les séances de chimio. Il refroidit le cuir chevelu, ce qui réduit le flux sanguin et donc la quantité de médicament atteignant les racines des cheveux, limitant parfois leur chute."
+    },
+    {
+        "id": "emo_01",
+        "category": "Emotionnel",
+        "content": "Il est normal de ressentir de la peur, de la colère ou de la tristesse. N'hésitez pas à en parler à votre oncologue, ou à rejoindre des groupes de parole de femmes vivant la même chose."
+    },
+    {
+        "id": "nut_01",
+        "category": "Nutrition",
+        "content": "Une alimentation équilibrée aide le corps à supporter les traitements. Privilégiez les petits repas fréquents si vous avez des nausées, et hydratez-vous bien. Le gingembre peut parfois aider contre les nausées."
+    }
+]

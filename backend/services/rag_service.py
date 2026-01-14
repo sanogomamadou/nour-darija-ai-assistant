@@ -1,40 +1,68 @@
-# Simple Mock RAG for POC
-# In a real app, this would use ChromaDB or Qdrant
+import os
+import chromadb
+import google.generativeai as genai
+from dotenv import load_dotenv
 
-MOCK_CORPUS = [
-    {
-        "id": 1,
-        "content": "La chimiothérapie est un traitement qui utilise des médicaments pour détruire les cellules cancéreuses. Elle peut causer la chute des cheveux (alopécie), la fatigue, et des nausées. Ce n'est pas automatique pour tout le monde."
-    },
-    {
-        "id": 2,
-        "content": "La radiothérapie utilise des rayons à haute énergie pour tuer les cellules cancéreuses. Elle est souvent localisée et fatigue moins que la chimio, mais peut irriter la peau."
-    },
-    {
-        "id": 3,
-        "content": "Le casque réfrigérant peut aider à réduire la chute des cheveux pendant la chimiothérapie en réduisant le flux sanguin vers le cuir chevelu."
-    },
-    {
-        "id": 4,
-        "content": "La fatigue est le symptôme le plus courant. Il est important de se reposer et de demander de l'aide pour les tâches quotidiennes."
-    }
-]
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-def retrieve_context(query: str):
-    # Very naive keyword search for POC
-    query = query.lower()
-    relevant_chunks = []
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+
+# Configuration
+CHROMA_PATH = "chroma_db"
+COLLECTION_NAME = "nour_knowledge"
+EMBEDDING_MODEL = "models/text-embedding-004"
+
+# Global Client
+try:
+    client = chromadb.PersistentClient(path=CHROMA_PATH)
+    collection = client.get_collection(name=COLLECTION_NAME)
+    print("RAG Service: ChromaDB collection loaded.")
+except Exception as e:
+    print(f"RAG Service Error: Could not load ChromaDB collection. {e}")
+    collection = None
+
+def get_query_embedding(text):
+    if not GEMINI_API_KEY:
+        return None
+    try:
+        result = genai.embed_content(
+            model=EMBEDDING_MODEL,
+            content=text,
+            task_type="retrieval_query"
+        )
+        return result['embedding']
+    except Exception as e:
+        print(f"Embedding Error: {e}")
+        return None
+
+def retrieve_context(query: str, n_results: int = 2):
+    """
+    Retrieves relevant context from ChromaDB using Gemini Embeddings.
+    """
+    if not collection:
+        return ""
     
-    keywords = query.split()
-    for doc in MOCK_CORPUS:
-        score = 0
-        for word in keywords:
-            if word in doc['content'].lower():
-                score += 1
+    query_embedding = get_query_embedding(query)
+    if not query_embedding:
+        return ""
+
+    try:
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=n_results
+        )
         
-        if score > 0:
-            relevant_chunks.append(doc['content'])
-    
-    if relevant_chunks:
-        return "\n".join(relevant_chunks)
-    return ""
+        # Format results
+        # results['documents'] is a list of lists (one list per query)
+        documents = results['documents'][0]
+        
+        if documents:
+            context_str = "\n\n".join(documents)
+            return context_str
+        return ""
+        
+    except Exception as e:
+        print(f"RAG Query Error: {e}")
+        return ""

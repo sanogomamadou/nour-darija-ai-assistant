@@ -6,3 +6,4 @@ openai
 httpx
 pydantic
 google-generativeai
+chromadb
