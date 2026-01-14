@@ -92,6 +92,3 @@ Le système de prompts (`prompts.py`) impose des limites strictes :
 2.  **EDUCATIONAL ONLY** : Fournit des explications générales sur les symptômes et traitements.
 3.  **NO PRESCRIPTIONS** : Refus de modifier les traitements médicaux.
 4.  **EMERGENCY** : Redirection immédiate si des mots-clés de danger (suicide, crise cardiaque) sont détectés.
-
----
-*Développé avec ❤️ pour R&D S9.*
